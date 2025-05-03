@@ -12,6 +12,7 @@
             <div class="flex items-center justify-center mb-5 text-4xl">
                 <h1>Watch</h1>
             </div>
+
             <div class="flex gap-2 text-6xl" >
                 <div class="flex gap-2">
                     <h1 id="hour">00</h1>
@@ -25,31 +26,63 @@
                     <h1 id="second">00</h1>
                 </div>
             </div>
+            <div>
+
+                <div class="">
+                    <h1>Date</h1>
+                    <div class="flex">
+                        <div>
+                            <h1 class="flex"><p id="date"></p>/</h1>
+                        </div>
+                        <div>
+                            <h1 class="flex"><p id="month"></p>/</h1>                        
+                        </div>
+                        <div>
+                            <h1 ><p id="year"></p></h1>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h1>Day</h1>
+                </div>
+            </div>
         </div>
     </div>
 
 
-    <Script>
+    <script>
         var hour = document.getElementById('hour');
         var minutes = document.getElementById('minutes');
         var second = document.getElementById('second');
-
-        var clock = setInterval(
-
-            function time(){
-                var currentTime = new Date();
-                console.log(currentTime);
-
-                var hr = currentTime.getHours();
-                var min = currentTime.getMinutes();
-                var sec = currentTime.getSeconds();
-
-
-                hour.innerHTML = hr;
-                minutes.innerHTML = min;
-                second.innerHTML  = sec;
+        var spans = document.getElementsByTagName('span');
+        var date = document.getElementById('date');
+        var month = document.getElementById('month');
+        var year = document.getElementById('year');
+    
+        function time() {
+            var currentTime = new Date();
+            var hr = currentTime.getHours();
+            var min = currentTime.getMinutes();
+            var sec = currentTime.getSeconds();
+            var d = currentTime.getDate();
+            var mon = currentTime.getMonth() + 1;
+            var y = currentTime.getFullYear();
+            console.log(currentTime);
+    
+            hour.innerHTML = hr < 10 ? "0" + hr : hr;
+            minutes.innerHTML = min < 10 ? "0" + min : min;
+            second.innerHTML = sec < 10 ? "0" + sec : sec;
+            date.innerHTML = d;
+            month.innerHTML = mon;
+            year.innerHTML = y;
+        }
+        setInterval(time, 1000);
+        setInterval(() => {
+            for (let i = 0; i < spans.length; i++) {
+                spans[i].style.opacity = spans[i].style.opacity === "1" ? "0.3" : "1";
             }
-        )
-    </Script>
+        }, 1000); 
+    </script>
+    
 </body>
 </html>
